@@ -1,0 +1,63 @@
+Satellite URL:
+
+https://192.168.46.228
+
+UserName: XXXXX
+Passwiord: XXXXXXX
+
+
+IP: 192.168.46.228
+Username: XXXX
+Pass: XXXXXXXXXXX
+
+###vi /etc/virt-who.d/vcenter.conf
+After adding Host restart the service
+###service virt-who restart
+## virt-who --one-shot
+
+
+Login 192.168.46.228 via url
+
+Go All host -Content host
+
+--------------------------------------------------------------------------------------------
+VM Part:
+
+Add Hostname:
+##echo "192.168.46.228  rhsat01.islamibankbd.com rhsat01" >>  /etc/hosts 
+##yum localinstall http://192.168.46.228/pub/katello-ca-consumer-latest.noarch.rpm
+
+
+##subscription-manager status 
+##subscription-manager register --org=ibbl --activationkey="PROD-RHEL7-KEY"
+
+## Yum Clean all
+##yum repolist
+
+Add Satellite Tools repo
+------------------------------------------------------------------------------
+
+########################## Next Step #############
+
+subscription-manager repos --enable=rhel-\*-satellite-tools-\*-rpms
+
+For Insights:
+##########################################################
+
+FOR RHEL:7
+subscription-manager repos --enable=rhel-7-server-insights-3-rpms
+
+
+FOR RHEL:6
+subscription-manager repos --enable=rhel-6-server-insights-3-rpms
+
+
+yum install katello-agent -y
+
+yum install redhat-access-insights  -y 
+
+redhat-access-insights --register
+
+
+########### How to check Subscription Manager Repo Lis ###################
+subscription-manager repos --list
